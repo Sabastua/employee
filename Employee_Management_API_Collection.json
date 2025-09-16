@@ -1,0 +1,458 @@
+{
+  "info": {
+    "name": "Employee Management API",
+    "description": "Complete API collection for Employee Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "string"
+    },
+    {
+      "key": "employeeId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. CRUD Operations",
+      "item": [
+        {
+          "name": "Create Employee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@company.com\",\n  \"phoneNumber\": \"+1234567890\",\n  \"department\": \"IT\",\n  \"position\": \"Software Developer\",\n  \"salary\": 75000.00,\n  \"hireDate\": \"2024-01-15\",\n  \"status\": \"ACTIVE\",\n  \"address\": \"123 Main St\",\n  \"city\": \"New York\",\n  \"state\": \"NY\",\n  \"zipCode\": \"10001\",\n  \"emergencyContactName\": \"Jane Doe\",\n  \"emergencyContactPhone\": \"+1987654321\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Get All Employees",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Get All Employees (Paginated)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees?page=0&size=5&sortBy=firstName&sortDir=asc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "firstName"
+                },
+                {
+                  "key": "sortDir",
+                  "value": "asc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Employee by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/{{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "{{employeeId}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Employee",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"john.smith@company.com\",\n  \"phoneNumber\": \"+1234567890\",\n  \"department\": \"IT\",\n  \"position\": \"Senior Software Developer\",\n  \"salary\": 85000.00,\n  \"hireDate\": \"2024-01-15\",\n  \"status\": \"ACTIVE\",\n  \"address\": \"456 Oak St\",\n  \"city\": \"New York\",\n  \"state\": \"NY\",\n  \"zipCode\": \"10002\",\n  \"emergencyContactName\": \"Jane Smith\",\n  \"emergencyContactPhone\": \"+1987654321\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/{{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "{{employeeId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Employee",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/{{employeeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "{{employeeId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Search & Filter",
+      "item": [
+        {
+          "name": "Search Employees",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/search?query=john&page=0&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "search"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "john"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Employees by Department",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/department/IT",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "department", "IT"]
+            }
+          }
+        },
+        {
+          "name": "Get Employees by Position",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/position/Software Developer",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "position", "Software Developer"]
+            }
+          }
+        },
+        {
+          "name": "Get Employees by Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/status/ACTIVE",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "status", "ACTIVE"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Date & Salary Filters",
+      "item": [
+        {
+          "name": "Get Employees Hired Between Dates",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/hired-between?startDate=2024-01-01&endDate=2024-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "hired-between"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-12-31"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Recently Hired Employees (Last N Months)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/recently-hired/6",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "recently-hired", "6"]
+            }
+          }
+        },
+        {
+          "name": "Get Employees with Salary Greater Than",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/salary/greater-than/70000",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "salary", "greater-than", "70000"]
+            }
+          }
+        },
+        {
+          "name": "Get Employees with Salary Between Range",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/salary/between?minSalary=50000&maxSalary=100000",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "salary", "between"],
+              "query": [
+                {
+                  "key": "minSalary",
+                  "value": "50000"
+                },
+                {
+                  "key": "maxSalary",
+                  "value": "100000"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Statistics & Reports",
+      "item": [
+        {
+          "name": "Get Department Statistics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/statistics/departments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "statistics", "departments"]
+            }
+          }
+        },
+        {
+          "name": "Get Status Statistics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/statistics/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "statistics", "status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Test Data Creation",
+      "item": [
+        {
+          "name": "Create Sample Employee - Alice Johnson",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Johnson\",\n  \"email\": \"alice.johnson@company.com\",\n  \"phoneNumber\": \"+1555000001\",\n  \"department\": \"HR\",\n  \"position\": \"HR Manager\",\n  \"salary\": 65000.00,\n  \"hireDate\": \"2023-03-15\",\n  \"status\": \"ACTIVE\",\n  \"address\": \"789 Pine St\",\n  \"city\": \"Boston\",\n  \"state\": \"MA\",\n  \"zipCode\": \"02101\",\n  \"emergencyContactName\": \"Bob Johnson\",\n  \"emergencyContactPhone\": \"+1555000002\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Create Sample Employee - Michael Brown",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Michael\",\n  \"lastName\": \"Brown\",\n  \"email\": \"michael.brown@company.com\",\n  \"phoneNumber\": \"+1555000003\",\n  \"department\": \"Finance\",\n  \"position\": \"Financial Analyst\",\n  \"salary\": 70000.00,\n  \"hireDate\": \"2023-07-20\",\n  \"status\": \"ACTIVE\",\n  \"address\": \"321 Elm St\",\n  \"city\": \"Chicago\",\n  \"state\": \"IL\",\n  \"zipCode\": \"60601\",\n  \"emergencyContactName\": \"Sarah Brown\",\n  \"emergencyContactPhone\": \"+1555000004\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Create Sample Employee - Emily Davis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Emily\",\n  \"lastName\": \"Davis\",\n  \"email\": \"emily.davis@company.com\",\n  \"phoneNumber\": \"+1555000005\",\n  \"department\": \"Marketing\",\n  \"position\": \"Marketing Specialist\",\n  \"salary\": 55000.00,\n  \"hireDate\": \"2024-02-10\",\n  \"status\": \"ACTIVE\",\n  \"address\": \"654 Maple Ave\",\n  \"city\": \"San Francisco\",\n  \"state\": \"CA\",\n  \"zipCode\": \"94102\",\n  \"emergencyContactName\": \"Tom Davis\",\n  \"emergencyContactPhone\": \"+1555000006\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Create Sample Employee - David Wilson",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"David\",\n  \"lastName\": \"Wilson\",\n  \"email\": \"david.wilson@company.com\",\n  \"phoneNumber\": \"+1555000007\",\n  \"department\": \"IT\",\n  \"position\": \"DevOps Engineer\",\n  \"salary\": 90000.00,\n  \"hireDate\": \"2023-11-05\",\n  \"status\": \"ACTIVE\",\n  \"address\": \"987 Cedar Ln\",\n  \"city\": \"Seattle\",\n  \"state\": \"WA\",\n  \"zipCode\": \"98101\",\n  \"emergencyContactName\": \"Lisa Wilson\",\n  \"emergencyContactPhone\": \"+1555000008\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Create Sample Employee - Sarah Miller (ON_LEAVE)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Sarah\",\n  \"lastName\": \"Miller\",\n  \"email\": \"sarah.miller@company.com\",\n  \"phoneNumber\": \"+1555000009\",\n  \"department\": \"Operations\",\n  \"position\": \"Operations Manager\",\n  \"salary\": 80000.00,\n  \"hireDate\": \"2022-09-12\",\n  \"status\": \"ON_LEAVE\",\n  \"address\": \"147 Oak Ave\",\n  \"city\": \"Denver\",\n  \"state\": \"CO\",\n  \"zipCode\": \"80201\",\n  \"emergencyContactName\": \"Mark Miller\",\n  \"emergencyContactPhone\": \"+1555000010\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Error Testing",
+      "item": [
+        {
+          "name": "Get Non-existent Employee (404 Test)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/employees/9999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees", "9999"]
+            }
+          }
+        },
+        {
+          "name": "Create Employee with Duplicate Email (400 Test)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\",\n  \"email\": \"john.doe@company.com\",\n  \"phoneNumber\": \"+1111111111\",\n  \"department\": \"Test\",\n  \"position\": \"Tester\",\n  \"salary\": 50000.00,\n  \"hireDate\": \"2024-01-01\",\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        },
+        {
+          "name": "Create Employee with Invalid Data (400 Test)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"\",\n  \"lastName\": \"\",\n  \"email\": \"invalid-email\",\n  \"department\": \"\",\n  \"position\": \"\",\n  \"salary\": -1000,\n  \"status\": \"INVALID_STATUS\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "employees"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
